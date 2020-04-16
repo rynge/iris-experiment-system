@@ -15,7 +15,7 @@ ExecStartPre=-/usr/bin/docker kill iris-http-proxy
 ExecStartPre=-/usr/bin/docker rm iris-http-proxy
 ExecStartPre=-/usr/bin/docker pull ryantanaka/iris:http-proxy
 
-ExecStart=/usr/bin/docker run --name iris-http-proxy --rm -p 8000:8000 -e PYTHONUNBUFFERED=1 ryantanaka/iris:http-proxy
+ExecStart=/usr/bin/docker run --name iris-http-proxy --rm -p 8000:8000 -v /cache:/cache -e PYTHONUNBUFFERED=1 ryantanaka/iris:http-proxy
 ExecStop=/usr/bin/docker stop iris-http-proxy
 
 

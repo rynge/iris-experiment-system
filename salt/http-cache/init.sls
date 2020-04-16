@@ -6,6 +6,12 @@ docker-ce:
     - name: docker
     - enable: True
 
+/cache:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
+
 iris-http-proxy.systemd-unit:
   file.managed:
     - name: /etc/systemd/system/iris-http-proxy.service
@@ -19,7 +25,7 @@ iris-http-proxy.systemd-unit:
 iris-http-proxy:
   service.running:
     - name: iris-http-proxy
-    - reload: True
+    - reload: False
     - watch:
       - module: iris-http-proxy.systemd-unit
 
