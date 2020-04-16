@@ -23,7 +23,7 @@ systemctl restart salt-minion
 
 # configure the salt master
 
-for MINION in `cat /etc/hosts | egrep 'Compute|Submit' | sed 's/.*\t//' | sort`; do
+for MINION in `cat /etc/hosts | egrep -i 'compute|submit|staging' | sed 's/.*\t//' | sort`; do
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $MINION \
 	"apt install -y salt-minion ; echo 'master: Control' >/etc/salt/minion.d/50-main.conf ; perl -p -i -e 's;#default_include.*;default_include: minion.d/*.conf;' /etc/salt/minion ; salt-call --state-verbose=false state.highstate"
     salt-key -y -a $MINION

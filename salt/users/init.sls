@@ -1,4 +1,23 @@
 
+/etc/sudoers:
+  file:
+    - managed
+    - mode: 444
+    - source: salt://users/sudoers
+
+ericafu:
+  user.present:
+    - fullname: Erica Fu
+    - shell: /bin/bash
+    - home: /home/ericafu
+    - uid: 1002
+    - groups:
+      - users
+  ssh_auth.present:
+    - user: ericafu
+    - names:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDebcxJiArFzZCWDwTMbH9xRaCQ/1c3e2MpKbTtTvRxX6QSvw6AqwZ3/2dOmHkJDmCSWEMVzwSwjvWmjfsCNz/PnA9hC76C4IGoQ644TErURBYDaRP7FbZpVKCB+nfTNUovOK0AUPJwmi33IaAR4aqrXBk+zXAZRVH0xDjZtNMN+7t24Nz1mdiigSWGzLz2ymyQYmQ9zVbdUewxnyamJIyXP3lByJsnQYdFmnJ0wgou7yVDrQgWCRRk8ISXIrRdP1H9KsaXWPCKYNTS8/k4FbMMybaPn1KjBJ+QxNWgZCGJx6fpOnArECBEMMFLUl+xonLOZDnq+Cf/gwUrg+yGjI5f ericafu
+
 rynge:
   user.present:
     - fullname: Mats Rynge

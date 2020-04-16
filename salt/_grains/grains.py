@@ -5,19 +5,22 @@ import re
 
 def custom_grains():
     grains = {}
+
+    grains['experiment'] = 'IRIS'
+
     grains['roles'] = []
 
     grains['roles'].append('common')
 
     # use hostname for now
     hostname = os.uname()[1]
-    if re.match('control', hostname, re.IGNORECASE):
+    if re.search('control', hostname, re.IGNORECASE):
         grains['roles'].append('control')
-    elif re.match('submit', hostname, re.IGNORECASE):
+    elif re.search('submit', hostname, re.IGNORECASE):
         grains['roles'].append('submit')
-        # submit is staging_site as well for now
+    elif re.search('staging', hostname, re.IGNORECASE):
         grains['roles'].append('staging')
-    elif re.match('compute', hostname, re.IGNORECASE):
+    elif re.search('compute', hostname, re.IGNORECASE):
         grains['roles'].append('compute')
         # all computes are http_caches for now
         grains['roles'].append('http_cache')

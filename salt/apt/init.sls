@@ -1,4 +1,10 @@
 
+# allow https even when OCSP fails
+/etc/apt/apt.conf.d/99verify-peer.conf:
+  file:
+    - managed
+    - source: salt://apt/99verify-peer.conf
+
 # Docker
 docker-repo:
   pkgrepo.managed:
